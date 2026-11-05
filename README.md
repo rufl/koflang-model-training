@@ -14,7 +14,7 @@ See [TRAINING_HISTORY.md](TRAINING_HISTORY.md) for lineage, gates, failures, and
 
 The next low-risk cross-model candidate is [Qwen/Qwen3-4B-Instruct-2507](https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507). Its official card reports 4B parameters, Apache-2.0, coding results, tool-use support, and BFCL-v3 61.9. Those are upstream results, **not** a Pi/Kof evaluation. No Qwen checkpoint was downloaded or trained here. Pi tool-call compatibility and Arc 140T speed remain untested.
 
-Xenolith reports Arc 140T support, but its README targets a specific Gemma 4 26B-A4B QAT checkpoint; Qwen support is not established. See [PUBLICATION_SCOPE.md](PUBLICATION_SCOPE.md) for the inference caveat.
+Xenolith targets Gemma 4 26B-A4B QAT, not Qwen; the model is 26B total parameters (3.8B active) and its GGUF is 13.27 GiB, so it is not the small trainable candidate sought here. A local smoke on Arc 140T passed Xenolith's GPU checks and both XenoPi real-model MCP/codemode acceptance tests (2/2). One-sample Xenolith measurements at context 4096 were 151.68 tok/s prefill (128 tokens) and 18.29 tok/s decode (32 tokens). The dual-GPU host needed a local-only Level Zero driver-selection patch; no upstream change was made. The MCP tests exercised an echo fixture, not Kof coding quality. Each service start spent about 232 seconds hashing the model on the external test drive, so the throughput figures exclude substantial cold-start cost. Qwen compatibility with Xenolith remains unestablished; see [PUBLICATION_SCOPE.md](PUBLICATION_SCOPE.md) for the inference caveat.
 
 ## Repository contents and license
 
