@@ -1,6 +1,6 @@
 # Publication scope and licensing status
 
-This public repository contains an experiment record, a generic Unsloth profile, and only the three datasets listed under [`datasets/`](datasets/README.md). It does **not** redistribute the complete local training workspace or all historical corpora.
+This public repository contains the experiment record, a generic Unsloth profile, the V39 Kof evaluation prompt, one sanitized Qwen inference-baseline report, and only the three datasets listed under [`datasets/`](datasets/README.md). It does **not** redistribute the complete local training workspace or all historical corpora.
 
 ## Not included
 
@@ -17,10 +17,10 @@ At the checked repository revision `1c8928e189f0fb1380f5f1dab1b2e0a0fb814c6e`, H
 
 ## License boundary
 
-The root [LICENSE](LICENSE) applies only to the original documentation and generic YAML profile. [`datasets/COPYING`](datasets/COPYING) separately applies to the included datasets. Neither license applies to Lumi weights, adapters, excluded source data, or other upstream material. The Qwen candidate is referenced only; no Qwen weights are included.
+The root [LICENSE](LICENSE) covers original documentation, the generic YAML profile, [`configs/kof-system-prompt-v39-ablation.txt`](configs/kof-system-prompt-v39-ablation.txt), and [`reports/qwen3-4b-arc-140t-pi-kof-baseline.json`](reports/qwen3-4b-arc-140t-pi-kof-baseline.json). [`datasets/COPYING`](datasets/COPYING) separately applies to included datasets. Neither license applies to Lumi weights, adapters, excluded source data, or third-party model artifacts. The Qwen GGUF and all model weights are not included.
 
 ## Evidence retained
 
-[`TRAINING_HISTORY.md`](TRAINING_HISTORY.md) records aggregate scores, run metrics, and SHA-256 fingerprints. [`datasets/`](datasets/README.md) contains the exact released data and corpus hashes. Hashes for withheld artifacts are provenance identifiers, not download links or license grants.
+[`TRAINING_HISTORY.md`](TRAINING_HISTORY.md) records training lineage and aggregate scores. The Qwen report contains sanitized per-case results and hashes, not raw traces. [`datasets/`](datasets/README.md) contains exact released data and corpus hashes. Hashes for withheld artifacts are provenance identifiers, not download links or license grants.
 
 To publish the remaining mixed corpora, audit and preserve per-example source/license provenance. To publish Lumi weights or adapters, obtain an explicit redistribution license or written permission from CEIA-BR. Do not relicense third-party model artifacts under GPL solely because the Kof training material is GPL.

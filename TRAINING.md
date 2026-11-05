@@ -29,7 +29,7 @@ For every run, record the exact base-model revision, dataset hash and license, c
 
 ## Candidate and inference notes
 
-Qwen3-4B-Instruct-2507 (Apache-2.0) has now been tested, without training, through Pi's OpenAI-compatible tool-call path on llama.cpp/Vulkan and Arc 140T. It scored 1/7 on the targeted V5 Kof gate and 0/1 on the typed-function holdout; tool-call transport works, but coding reliability is not daily-driver quality. One warmed 88-token completion measured 15.13 tok/s. This run used the default Kof system prompt, unlike V37/V38's V39 ablation prompt, so scores are not directly comparable. [Full results](reports/qwen3-4b-arc-140t-pi-kof-baseline.json).
+Qwen3-4B-Instruct-2507 (Apache-2.0) has been evaluated without training through Pi's OpenAI-compatible tool-call path on llama.cpp/Vulkan and Arc 140T. It scored 1/7 on V5 with both the default and V39 ablation prompts, and 0/1 on the typed-function holdout under both. The V39-prompt run is prompt/benchmark-matched to V37/V38 (2/7), though inference backends differ. Pi tool transport works; Kof coding is not daily-driver quality. A warmed 88-token completion measured 15.13 tok/s. [Per-case results](reports/qwen3-4b-arc-140t-pi-kof-baseline.json).
 
 Xenolith evidence here is for Gemma 4 26B-A4B QAT, not Qwen3. Qwen3 support in Xenolith remains untested; llama.cpp Vulkan is the verified Qwen inference path. Qwen3.5-4B is newer, but Unsloth's guide discourages 4-bit QLoRA for that family; its XPU training and Arc 140T inference remain unverified.
 

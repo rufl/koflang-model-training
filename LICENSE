@@ -1,4 +1,4 @@
-Scope: This MIT license applies only to the original documentation files (`README.md`, `TRAINING.md`, `TRAINING_HISTORY.md`, `PUBLICATION_SCOPE.md`) and the generic profile `configs/unsloth-sft-portable.yaml` in this repository. It does not apply to third-party works or artifacts excluded as described in `PUBLICATION_SCOPE.md`.
+Scope: This MIT license applies only to the original documentation files (`README.md`, `TRAINING.md`, `TRAINING_HISTORY.md`, `PUBLICATION_SCOPE.md`), generic profile `configs/unsloth-sft-portable.yaml`, evaluation prompt `configs/kof-system-prompt-v39-ablation.txt`, and sanitized report `reports/qwen3-4b-arc-140t-pi-kof-baseline.json`. It does not apply to third-party works or artifacts excluded as described in `PUBLICATION_SCOPE.md`.
 
 MIT License
 

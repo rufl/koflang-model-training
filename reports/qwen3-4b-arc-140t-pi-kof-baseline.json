@@ -58,8 +58,33 @@
     "typed_holdout_runner_wall_seconds": 29.45,
     "raw_traces_published": false
   },
-  "comparison_caveat": "V37/V38's published 2/7 V5 scores used the V39 ablation system prompt. This Qwen run used the default system prompt, so the scores are not a controlled head-to-head comparison.",
-  "decision": "Pi tool-call transport works and Q4 inference is usable at about 15 tokens/s, but Kof task reliability is not acceptable for daily-driver use (1/7 V5, 0/1 typed holdout). Do not promote or claim Kof competence. Xenolith compatibility with this Qwen checkpoint remains untested; current Xenolith evidence is for Gemma 4, so llama.cpp is the verified Qwen path.",
+  "v39_prompt_matched_evaluation": {
+    "evaluation_system_prompt": "configs/pi-agent/kof-system-prompt-v39-ablation.txt",
+    "published_prompt_copy": "configs/kof-system-prompt-v39-ablation.txt",
+    "system_prompt_sha256": "a394c0d15b9cae100116c35b7bf3e52dd1746be857e6c75b3e8fd9276f490d60",
+    "v5_benchmark_sha256": "9f96fa054895437803ab036329cd577ffa150791b819e4a60570edd98211efe6",
+    "v5_score": {"passed": 1, "total": 7, "pass_case_ids": ["tool-continuation-derived-task"]},
+    "typed_function_holdout": {"passed": 0, "total": 1, "case_id": "typed-function-bracket"},
+    "cases": [
+      {"id": "conditional-loop-sum-even", "passed": false, "pi_seconds": 129.436, "compiler_exit_code": 1, "failure": "Generated let/colon-assignment source did not compile."},
+      {"id": "conditional-loop-count", "passed": false, "pi_seconds": 115.635, "compiler_exit_code": 1, "failure": "Kof rejected the generated main() -> int entrypoint; compilation failed."},
+      {"id": "list-count-even", "passed": false, "pi_seconds": 180.016, "timed_out": true, "compiler_exit_code": 1},
+      {"id": "list-filter-range-sum", "passed": false, "pi_seconds": 118.277, "compiler_exit_code": 1, "failure": "Generated return-type and entrypoint syntax did not compile."},
+      {"id": "switch-in-while-loop", "passed": false, "pi_seconds": 126.443, "compiler_exit_code": 1, "failure": "Generated top-level variable and loop did not compile."},
+      {"id": "tool-continuation-derived-task", "passed": true, "pi_seconds": 32.627, "tools_called": ["kof_list", "kof_read", "kof_apply", "kof_run"], "stdout": "112\n"},
+      {"id": "kof-cloud-backoff-hard-cap", "passed": false, "pi_seconds": 180.014, "timed_out": true, "compiler_exit_code": 0, "tools_called": ["kof_list", "kof_read", "kof_edit", "kof_run", "kof_apply"], "project_tests": {"failed": 0, "total": 4}, "failure": "All project tests passed, but Pi timed out and did not call the required kof_test tool."},
+      {"id": "typed-function-bracket", "passed": false, "pi_seconds": 97.698, "compiler_exit_code": 1, "failure": "Generated text -> [text] pseudocode, not a Kof function."}
+    ],
+    "v5_runner_wall_seconds": 888.01,
+    "typed_holdout_runner_wall_seconds": 98.09,
+    "raw_result_sha256": {
+      "v5": "091d783e41dbd13356d2844275eb13489ebfb9cc11c81fbbf0b1297b410f1144",
+      "typed_holdout": "f9212ea52f69a2fdc3fc683aad70b659214406b2a3a3d792ec083b306e59a13b"
+    },
+    "raw_traces_published": false
+  },
+  "comparison_caveat": "Qwen scored 1/7 under both the default and V39 prompts. Under the V39 prompt and same V5 benchmark, V37/V38 scored 2/7. This matches prompt and evaluator criteria, but not the model or inference backend; Qwen used llama.cpp/Vulkan.",
+  "decision": "The V39 guidance did not improve Qwen: it still scored 1/7 on V5 and 0/1 on typed functions, versus V37/V38 at 2/7 under the matched prompt. Pi tool transport works and Q4 decode is about 15 tokens/s, but Kof syntax and agent stopping remain unreliable. Do not promote Qwen or spend another adapter run on this evidence. Xenolith compatibility with Qwen remains untested; llama.cpp is the verified Qwen path.",
   "provenance": {
     "evaluator_sha256": "1df1b324a1a6e112d5c7347275c90437bca97480e820be02e2f570399295f54f",
     "tool_extension_sha256": "7f81b1ad4141bfc6384889419d5d13218d133b56d74d65dd653934990607d094",
