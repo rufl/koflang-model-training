@@ -1,0 +1,23 @@
+{
+  "dataset": "datasets/kof-0.6.10-pi-tool-v38.jsonl",
+  "dataset_sha256": "8fb443d3718abe3bce6164531d1c6ac6f941f5f910477411954688025bc0c8b5",
+  "generator": "scripts/build_pi_tool_sft_v38.py",
+  "generator_sha256": "bfb78490f5a90d91014c37c0d7175d5c8b8628fb4a3bda59c88dfc79d02e9393",
+  "parent_dataset": "datasets/kof-0.6.10-pi-tool-v37.jsonl",
+  "parent_dataset_sha256": "8f8017ded941ae7157b24834cb6b944f01112ffbc367d709fec811653cc4fde5",
+  "parent_rows": 589,
+  "removed_conflicting_kof_print_diagnostic_rows": 0,
+  "new_verified_program_rows": 12,
+  "new_verified_project_rows": 48,
+  "project_fixtures_verified_before_and_after": 8,
+  "edit_error_recovery_fixtures": 2,
+  "all_new_assistant_actions_positive": true,
+  "exact_heldout_prompt_matches": 0,
+  "exact_heldout_reference_matches": 0,
+  "rows": 649,
+  "input_tokens": 145602,
+  "max_formatted_tokens": 256,
+  "mean_formatted_tokens": 224.35,
+  "max_sequence_length": 256,
+  "curriculum_change": "Contrasts count vs sum with the same predicate; requires println and kof_run; adds valid while/switch and top-level typed functions; trains exact in-place kof_edit on source plus regression test; includes recovery context for stale edit spans."
+}

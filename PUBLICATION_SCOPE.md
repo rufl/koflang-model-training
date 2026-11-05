@@ -1,23 +1,25 @@
 # Publication scope and licensing status
 
-This public repository is an archival summary and a generic Unsloth profile. It does **not** redistribute the full local training workspace.
+This public repository contains an experiment record, a generic Unsloth profile, and only the three datasets listed under [`datasets/`](datasets/README.md). It does **not** redistribute the complete local training workspace or all historical corpora.
 
 ## Not included
 
-- Lumi base-model weights, tokenizer files, or V17/V24/V37/V38 adapters.
-- Kof-derived training JSONL, data-builder scripts containing embedded examples, Kof source/compiler/SDK bundles, benchmark definitions, or raw Pi/evaluation traces.
-- Local caches, logs containing full prompts/output, private upload files, or temporary workspaces.
+- CEIA-BR Lumi base-model weights, tokenizer files, or V17/V24/V37/V38 adapters.
+- The mixed-source full-corpus v11/v12 datasets, other historical Pi/tool datasets without row-level source licensing, builder scripts containing embedded examples, Kof source/compiler/SDK bundles, benchmark definitions, or raw Pi/evaluation traces.
+- Local caches, logs containing full prompts/output, private upload files, and temporary workspaces.
 
-These exclusions are deliberate, not missing downloads. The local provenance record says the CEIA-BR `lumi-4b` model card does not declare a license. It also records training material derived from Kof 0.6.10 source at revision `b5b63d14eca5ac6ab0ba80fd7c8ea00b03f387c0`, licensed GPL-3.0. The combined corpus contains additional generated/curated material, and its complete redistribution terms were not resolved. The adapter therefore has **no declared MIT license**. No model or dataset license is asserted here.
+The included datasets are scoped separately: the two seed corpora are derived from Kof 0.6.10 source and documentation at revision `b5b63d14eca5ac6ab0ba80fd7c8ea00b03f387c0`; the V38 corpus contains generated Kof tasks and synthetic project fixtures. They are released under GPL-3.0-only with the full text in [`datasets/COPYING`](datasets/COPYING). Kof's source license does not automatically license every program written in Kof; the V38 dataset is placed under GPL by project choice.
 
-The GPL-3.0 status of the upstream Kof source does not itself resolve the license of the combined corpus or model adapter. The user-requested MIT intent was not treated as proof of redistribution rights.
+The training provenance for the mixed full corpus includes Kof GPL-3.0, site/course sources with `NOASSERTION`, BSD-licensed repositories, and an Apache-2.0 repository. The combined rows do not retain sufficient per-example licensing to split safely. Those corpora and descendants with unresolved source lineage are not published under a blanket GPL.
+
+CEIA-BR's [`lumi-4b` model card](https://huggingface.co/ceia-br/lumi-4b) does not declare a license or full model provenance. The adapter therefore has **no declared license**. A Kof GPL license cannot grant rights to Lumi weights or adapter derivatives; redistribution requires an upstream license or written permission from CEIA-BR.
 
 ## License boundary
 
-The root [LICENSE](LICENSE) applies only to the original documentation and the generic YAML profile in this repository. It does not license CEIA-BR Lumi, Kof source or binaries, any training data, any adapter/checkpoint, or any other upstream material. The Qwen candidate is referenced only; no Qwen weights are included.
+The root [LICENSE](LICENSE) applies only to the original documentation and generic YAML profile. [`datasets/COPYING`](datasets/COPYING) separately applies to the included datasets. Neither license applies to Lumi weights, adapters, excluded source data, or other upstream material. The Qwen candidate is referenced only; no Qwen weights are included.
 
 ## Evidence retained
 
-[TRAINING_HISTORY.md](TRAINING_HISTORY.md) records aggregate scores, run metrics, and SHA-256 fingerprints for withheld artifacts. A hash is not a copy of an artifact and grants no redistribution right. Raw result traces and local absolute paths were omitted from this public copy.
+[`TRAINING_HISTORY.md`](TRAINING_HISTORY.md) records aggregate scores, run metrics, and SHA-256 fingerprints. [`datasets/`](datasets/README.md) contains the exact released data and corpus hashes. Hashes for withheld artifacts are provenance identifiers, not download links or license grants.
 
-Before publishing training corpora, raw traces, or adapter weights, resolve the base model's license and audit every dataset/source license and provenance. Do not label the adapter MIT based solely on the intended project license.
+To publish the remaining mixed corpora, audit and preserve per-example source/license provenance. To publish Lumi weights or adapters, obtain an explicit redistribution license or written permission from CEIA-BR. Do not relicense third-party model artifacts under GPL solely because the Kof training material is GPL.

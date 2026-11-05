@@ -18,6 +18,6 @@ Xenolith reports Arc 140T support, but its README targets a specific Gemma 4 26B
 
 ## Repository contents and license
 
-This repository contains only the experiment documentation and a generic Unsloth profile. The training corpora, embedded training examples, base-model weights, LoRA adapters, Kof source/compiler bundle, and raw evaluation traces are not included while redistribution rights remain unresolved. No MIT license is claimed for those artifacts.
+The repository includes two source-derived Kof seed corpora and the final V38 SFT corpus under [`datasets/`](datasets/README.md), distributed under GPL-3.0-only with a separate license copy. The mixed-source corpora, base-model weights, tokenizer files, LoRA adapters, Kof source/compiler bundle, and raw evaluation traces remain excluded. Lumi's license is undeclared, and mixed-corpus per-row rights are unresolved; no GPL or MIT license is claimed for those artifacts.
 
 The [LICENSE](LICENSE) applies only to the original documentation and generic YAML profile present here. See [PUBLICATION_SCOPE.md](PUBLICATION_SCOPE.md) before reusing any model/data references.
