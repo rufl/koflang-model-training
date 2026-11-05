@@ -37,6 +37,28 @@ V38 also failed V2.1 `typed-function-bracket` (**0/1**): the generated function 
 
 The matched V5 hard-cap case passing does not erase the separate V37 isolated hard-cap result (1/4 project tests failed). The full KOOKIE project workflow was not passed by V37; V38 did not proceed to larger project gates because it showed no targeted improvement.
 
+## Cross-model baseline: Qwen3-4B (inference only)
+
+On 2026-11-05, untrained Qwen3-4B-Instruct-2507 ran as Q4_K_M through llama.cpp 0.5.0-dev (build 2, commit `d1888d2`), Vulkan device `Vulkan0: Intel(R) Graphics (ARL)`, with Pi 0.84.4 and Kof 0.6.10. The server was pinned to Vulkan0, not the separately enumerated A770. The tested GGUF SHA-256 is `2fde00ce69dd4899c70d020845e2638353015bba0fdf161b3eb965f2bca4464e`; the base model card declares Apache-2.0. No Qwen adapter was trained or included.
+
+The same V5 evaluator scored **1/7**; only `tool-continuation-derived-task` passed. V2.1 `typed-function-bracket` scored **0/1**. The evaluator requires clean Pi exit, required tool use, compilable source, and exact output or project-test success.
+
+| Case | Result |
+|---|---|
+| `conditional-loop-sum-even` | Fail; Pi timed out at 180 s; final source did not compile. |
+| `conditional-loop-count` | Fail; compiled and ran, but printed hard-coded `7` without the required newline. |
+| `list-count-even` | Fail; compiler rejected generated syntax. |
+| `list-filter-range-sum` | Fail; Pi timed out at 180 s; final source did not compile. |
+| `switch-in-while-loop` | Fail; compiled and ran, but output lacked required line breaks. |
+| `tool-continuation-derived-task` | Pass; `kof_list` → `kof_read` → `kof_apply` → `kof_run`, exact output `112`. |
+| `kof-cloud-backoff-hard-cap` | Fail; all 4 project tests passed, but Pi timed out and omitted required `kof_test`. |
+| V2.1 `typed-function-bracket` | Fail; compiled and ran, but output was `offline[offline]`, not `[offline]`. |
+
+One warmed direct completion generated 88 tokens at 15.13 tokens/s. The seven V5 cases took 925.37 s wall time; the typed holdout took 29.45 s. This is a small synthetic gate, not a full real-project qualification. The V37/V38 published 2/7 scores used the V39 ablation prompt, while this Qwen run used the default prompt; the scores are not directly comparable. The hard-cap fixture's four passing tests do not convert its failed Pi interaction into a pass.
+
+The complete machine-readable result and artifact hashes are in [reports/qwen3-4b-arc-140t-pi-kof-baseline.json](reports/qwen3-4b-arc-140t-pi-kof-baseline.json). Qwen compatibility with Xenolith remains untested; llama.cpp Vulkan is the verified Qwen path.
+
+
 ## Promotion rule and disposition
 
 The intended promotion gates were V2.1 ≥7/9, V3 2/2, V4 11/11, V5 12/12, KOOKIE regression 2/2 and full suite 0 failed of 169, all project tests passing, and a successful launcher smoke. V38 did not meet the first targeted discriminator, so full gates were not run. **V17 remains default. V38 was the final Lumi training iteration; no V39 was started.**

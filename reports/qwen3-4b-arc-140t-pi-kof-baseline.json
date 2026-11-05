@@ -1,0 +1,73 @@
+{
+  "schema": "kof-qwen-inference-baseline.v1",
+  "date": "2026-11-05",
+  "status": "inference-only; no adapter training",
+  "model": {
+    "base_model": "Qwen/Qwen3-4B-Instruct-2507",
+    "base_model_license": "Apache-2.0 per upstream model card",
+    "gguf_repository": "bartowski/Qwen_Qwen3-4B-Instruct-2507-GGUF",
+    "gguf_file": "Qwen_Qwen3-4B-Instruct-2507-Q4_K_M.gguf",
+    "quantization": "Q4_K_M",
+    "size_bytes": 2497280736,
+    "sha256": "2fde00ce69dd4899c70d020845e2638353015bba0fdf161b3eb965f2bca4464e",
+    "redistributed_here": false
+  },
+  "inference": {
+    "engine": "llama.cpp",
+    "version": "0.5.0-dev build 2, commit d1888d2",
+    "backend": "Vulkan",
+    "device": "Vulkan0: Intel(R) Graphics (ARL), reported 35777 MiB; Vulkan1 was the Arc A770 and was not selected",
+    "device_selection": "--device Vulkan0",
+    "gpu_layers": "all",
+    "context_tokens": 8192,
+    "server_bind": "127.0.0.1:8097",
+    "pi_version": "0.84.4",
+    "kof_version": "0.6.10",
+    "sampling": {"temperature": 0, "top_p": 1, "top_k": 0, "min_p": 0},
+    "pi_max_output_tokens": 512
+  },
+  "performance_sample": {
+    "scope": "one warmed local chat-completion request; not a benchmark suite",
+    "prompt_tokens": 25,
+    "completion_tokens": 88,
+    "decode_milliseconds": 5750.864,
+    "decode_tokens_per_second": 15.128161611889972
+  },
+  "evaluation": {
+    "interface": "Qwen3-4B via llama.cpp OpenAI-compatible API, called by Pi with the existing Kof tools",
+    "v5_benchmark": "kof-pi-tool-v5.json",
+    "v5_benchmark_sha256": "9f96fa054895437803ab036329cd577ffa150791b819e4a60570edd98211efe6",
+    "typed_holdout_benchmark": "kof-pi-tool-v2.1.json",
+    "typed_holdout_benchmark_sha256": "f9280e758cbeb76f55a2d11fe183708c0f97ae908d4128bbdeb6f958d2e3cebc",
+    "system_prompt": "default configs/pi-agent/kof-system-prompt.txt",
+    "system_prompt_sha256": "3cb373c957c2354df699e24a96fbf196845f55ce3c3d76b161f65619e578ad82",
+    "v5_score": {"passed": 1, "total": 7, "pass_case_ids": ["tool-continuation-derived-task"]},
+    "typed_function_holdout": {"passed": 0, "total": 1, "case_id": "typed-function-bracket"},
+    "combined_score": {"passed": 1, "total": 8},
+    "cases": [
+      {"id": "conditional-loop-sum-even", "passed": false, "timeout_seconds": 180, "failure": "Pi timed out after repeated tool attempts; final source failed Kof compilation."},
+      {"id": "conditional-loop-count", "passed": false, "pi_seconds": 132.516, "failure": "Source compiled and ran, but printed the hard-coded string 7 without the required trailing newline; expected exact stdout 7\n."},
+      {"id": "list-count-even", "passed": false, "pi_seconds": 133.163, "failure": "Kof compilation failed; generated source used unsupported ternary syntax and print-call syntax."},
+      {"id": "list-filter-range-sum", "passed": false, "timeout_seconds": 180, "failure": "Pi timed out; final generated source failed Kof compilation."},
+      {"id": "switch-in-while-loop", "passed": false, "pi_seconds": 85.122, "failure": "Source compiled and ran, but stdout was initworkfinish instead of the required line-separated output."},
+      {"id": "tool-continuation-derived-task", "passed": true, "pi_seconds": 23.151, "tools_called": ["kof_list", "kof_read", "kof_apply", "kof_run"], "stdout": "112\n"},
+      {"id": "kof-cloud-backoff-hard-cap", "passed": false, "timeout_seconds": 180, "tools_called": ["kof_list", "kof_read", "kof_edit", "kof_apply"], "project_tests": {"failed": 0, "total": 4}, "failure": "Project verification passed all four tests, but Pi timed out and did not call the required kof_test tool."},
+      {"id": "typed-function-bracket", "passed": false, "pi_seconds": 28.168, "failure": "Source compiled and ran but returned offline[offline], not the required [offline] followed by a newline."}
+    ],
+    "v5_runner_wall_seconds": 925.37,
+    "typed_holdout_runner_wall_seconds": 29.45,
+    "raw_traces_published": false
+  },
+  "comparison_caveat": "V37/V38's published 2/7 V5 scores used the V39 ablation system prompt. This Qwen run used the default system prompt, so the scores are not a controlled head-to-head comparison.",
+  "decision": "Pi tool-call transport works and Q4 inference is usable at about 15 tokens/s, but Kof task reliability is not acceptable for daily-driver use (1/7 V5, 0/1 typed holdout). Do not promote or claim Kof competence. Xenolith compatibility with this Qwen checkpoint remains untested; current Xenolith evidence is for Gemma 4, so llama.cpp is the verified Qwen path.",
+  "provenance": {
+    "evaluator_sha256": "1df1b324a1a6e112d5c7347275c90437bca97480e820be02e2f570399295f54f",
+    "tool_extension_sha256": "7f81b1ad4141bfc6384889419d5d13218d133b56d74d65dd653934990607d094",
+    "models_config_sha256": "df8ab9c6286a91f9e75e788e8dad92289cf7e9e1a493b86096739ba743f2b387",
+    "raw_result_sha256": {
+      "pi_smoke": "8f7d5323fbaf9c84931858c1282a9c7ab0e094b2364cd1d883aeb51ff515a4dc",
+      "v5_remaining_six": "0b6f6ffb447a306411cd17b07a45597a94184c303ec6000239d4d9325c16319a",
+      "typed_holdout": "5a0ea8239e74433c5679040dd477bd5f31b197da0a8b5e59b8ef4b7a66be2c04"
+    }
+  }
+}

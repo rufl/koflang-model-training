@@ -29,8 +29,8 @@ For every run, record the exact base-model revision, dataset hash and license, c
 
 ## Candidate and inference notes
 
-The first cross-model candidate is [Qwen/Qwen3-4B-Instruct-2507](https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507), Apache-2.0. Qwen reports BFCL-v3 61.9 and documents coding/tool-use capabilities, Qwen-Agent, and llama.cpp support. This does not establish Pi/Kof reliability. The current Lumi server parser is model-specific; test tool-call serialization with Pi before training or relying on it.
+Qwen3-4B-Instruct-2507 (Apache-2.0) has now been tested, without training, through Pi's OpenAI-compatible tool-call path on llama.cpp/Vulkan and Arc 140T. It scored 1/7 on the targeted V5 Kof gate and 0/1 on the typed-function holdout; tool-call transport works, but coding reliability is not daily-driver quality. One warmed 88-token completion measured 15.13 tok/s. This run used the default Kof system prompt, unlike V37/V38's V39 ablation prompt, so scores are not directly comparable. [Full results](reports/qwen3-4b-arc-140t-pi-kof-baseline.json).
 
-Xenolith reports an Arc 140T test (`8086:7d51`) but targets one Gemma 4 26B-A4B QAT checkpoint. That does not establish Qwen3 support. For Qwen3, begin with llama.cpp's Intel backend; benchmark on the actual Arc 140T system before claiming performance. Qwen3.5-4B is newer, but Unsloth's guide discourages 4-bit QLoRA for that family; its XPU training and Arc 140T inference are unverified here.
+Xenolith evidence here is for Gemma 4 26B-A4B QAT, not Qwen3. Qwen3 support in Xenolith remains untested; llama.cpp Vulkan is the verified Qwen inference path. Qwen3.5-4B is newer, but Unsloth's guide discourages 4-bit QLoRA for that family; its XPU training and Arc 140T inference remain unverified.
 
 Sources: [Qwen3-4B model card](https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507), [Unsloth Qwen3 guide](https://unsloth.ai/docs/models/tutorials/qwen3-how-to-run-and-fine-tune), [Unsloth Qwen3.5 guide](https://unsloth.ai/docs/models/qwen3.5/fine-tune), [Xenolith](https://github.com/simoneiacomino/xenolith), [XenoPi](https://github.com/simoneiacomino/xenopi).
