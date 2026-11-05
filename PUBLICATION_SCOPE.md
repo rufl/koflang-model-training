@@ -12,7 +12,8 @@ The included datasets are scoped separately: the two seed corpora are derived fr
 
 The training provenance for the mixed full corpus includes Kof GPL-3.0, site/course sources with `NOASSERTION`, BSD-licensed repositories, and an Apache-2.0 repository. The combined rows do not retain sufficient per-example licensing to split safely. Those corpora and descendants with unresolved source lineage are not published under a blanket GPL.
 
-CEIA-BR's [`lumi-4b` model card](https://huggingface.co/ceia-br/lumi-4b) does not declare a license or full model provenance. The adapter therefore has **no declared license**. A Kof GPL license cannot grant rights to Lumi weights or adapter derivatives; redistribution requires an upstream license or written permission from CEIA-BR.
+CEIA-BR's [`lumi-4b` model card](https://huggingface.co/ceia-br/lumi-4b) does not declare a license or full model provenance. Hugging Face currently lists the repository as public and ungated (`gated: false`); the model files are downloadable without approval. That public access does **not** establish permission to mirror or redistribute them. The adapter therefore has **no declared license**. A Kof GPL license cannot grant rights to Lumi weights or adapter derivatives; redistribution requires an upstream license or written permission from CEIA-BR.
+At the checked repository revision `1c8928e189f0fb1380f5f1dab1b2e0a0fb814c6e`, Hugging Face listed approximately 7.96 GB of stored model files and no `license` metadata or `LICENSE` file. This is a metadata record, not authorization to republish the weights, tokenizer, or adapter tensors.
 
 ## License boundary
 
